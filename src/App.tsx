@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import { LoginPage } from './pages/LoginPage'
 import { NotificationsPage } from './pages/NotificationsPage'
+import { AppConfigPage } from './pages/AppConfigPage'
 import { AdminLayout } from './components/Layout'
 import { Loader2 } from 'lucide-react'
 
@@ -51,6 +52,7 @@ export function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<AdminLayout />}>
           <Route path="/" element={<NotificationsPage />} />
+          <Route path="/app-config" element={<AppConfigPage />} />
         </Route>
       </Route>
 

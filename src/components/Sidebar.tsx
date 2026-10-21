@@ -4,13 +4,15 @@ import {
   Bell,
   LogOut,
   Menu,
-  ChevronLeft
+  ChevronLeft,
+  SlidersHorizontal
 } from 'lucide-react'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
 const navigation = [
   { name: 'Notifications', href: '/', icon: Bell },
+  { name: 'App Config', href: '/app-config', icon: SlidersHorizontal },
 ]
 
 export function Sidebar() {

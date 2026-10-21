@@ -1,5 +1,12 @@
 import axios, { type AxiosInstance, type AxiosError } from 'axios'
-import type { ApiResponse, AdminLoginData, NotificationRequest, NotificationResult } from '../types'
+import type {
+  ApiResponse,
+  AdminLoginData,
+  AppConfigData,
+  NotificationRequest,
+  NotificationResult,
+  RemoteConfig,
+} from '../types'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'
 const API_PREFIX = import.meta.env.VITE_API_PREFIX || 'api/v1'
@@ -62,6 +69,16 @@ class ApiClient {
 
   async adminLogin(email: string, password: string): Promise<ApiResponse<AdminLoginData>> {
     const response = await this.client.post<ApiResponse<AdminLoginData>>('/admin/login', { email, password })
+    return response.data
+  }
+
+  async getAppConfig(): Promise<ApiResponse<AppConfigData>> {
+    const response = await this.client.get<ApiResponse<AppConfigData>>('/admin/app-config')
+    return response.data
+  }
+
+  async updateAppConfig(config: RemoteConfig, baseVersion: string): Promise<ApiResponse<AppConfigData>> {
+    const response = await this.client.put<ApiResponse<AppConfigData>>('/admin/app-config', { config, baseVersion })
     return response.data
   }
 

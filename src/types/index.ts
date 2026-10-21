@@ -27,6 +27,26 @@ export interface NotificationRequest {
   body: string
 }
 
+/** Text values in the app config: a string, a list of strings, or a nested group. */
+export type ConfigValue = string | string[] | ConfigGroup
+export interface ConfigGroup {
+  [key: string]: ConfigValue
+}
+
+export interface RemoteConfig {
+  serverUrl: string
+  content: ConfigGroup
+  [key: string]: unknown
+}
+
+export interface AppConfigData {
+  config: RemoteConfig
+  /** Hash of the stored config; sent back as baseVersion so concurrent edits are detected. */
+  version: string
+  /** False while KV is still empty and the config shown is the live worker's. */
+  storedInKv: boolean
+}
+
 export interface NotificationResult {
   id: string
   title: string
